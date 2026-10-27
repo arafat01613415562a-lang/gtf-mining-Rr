@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#080b16">
+<title>GTF Mining Rewards</title>
+<style>
+:root{--bg:#070a13;--panel:#111b2e;--panel2:#15233b;--line:#2b4164;--gold:#ffda79;--gold2:#e7a72a;--muted:#aebed9;--green:#8fffd1}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;width:100%;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#050711;color:#fff}
+body{overflow-x:hidden;background:radial-gradient(ellipse at 50% -15%,#213c69 0,#0b1223 42%,#050711 80%)}
+button,input{font:inherit}button{cursor:pointer}
+.app{position:relative;width:100%;max-width:480px;min-height:100vh;margin:auto;padding:14px 13px 92px;background:radial-gradient(ellipse at top,#17294a99 0%,#0a1020d9 42%,#070a13f2 100%);isolation:isolate}
+.app:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 15% 20%,#ffda7910,transparent 28%),radial-gradient(circle at 90% 55%,#4f87ff0c,transparent 30%)}
+.header{display:flex;align-items:center;gap:11px;padding:9px 0 17px}
+.logo{width:58px;height:58px;flex-shrink:0;border:2px solid #ffcf5b;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 32% 25%,#2565a9,#0a1730 72%);color:#ffdb76;font-weight:1000;font-size:18px;box-shadow:0 0 0 5px #ffcf5b0b,0 0 24px #ffc43b55,inset 0 1px #fff6;user-select:none;touch-action:manipulation}
+.brand{flex:1;min-width:0}.brand h1{font-size:19px;letter-spacing:1px;color:#ffda79;margin:0 0 5px;text-shadow:0 0 20px #ffda7920}.brand p{font-size:10px;letter-spacing:1px;color:#aabbd8;margin:0}
+.headbal{text-align:right;font-size:10px;color:#b7c5df}.headbal strong{display:block;font-size:14px;color:#ffda79;margin-top:5px}
+.card{border:1px solid #293b5b;border-radius:18px;background:linear-gradient(145deg,#16243b,#0b1221);padding:15px;margin:12px 0;box-shadow:0 12px 28px #0004,inset 0 1px #ffffff0a;position:relative;overflow:hidden}
+.card:after{content:"";position:absolute;left:12%;right:12%;top:0;height:1px;background:linear-gradient(90deg,transparent,#ffffff24,transparent);pointer-events:none}
+.balance{border-color:#75602f;background:linear-gradient(130deg,#302918,#172139 72%);padding:18px;box-shadow:0 14px 32px #0005,inset 0 1px #fff1}
+.label{font-size:11px;color:#c4cde0;letter-spacing:1.2px}.amount{font-size:31px;font-weight:900;color:#ffda79;margin:7px 0;text-shadow:0 0 24px #ffcf5b24}.coin{font-size:12px;color:#e8c36a}
+.userline{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}.uid{font-size:12px;color:#e1e9f8;overflow-wrap:anywhere}
+.btn{border:0;border-radius:11px;padding:11px 13px;font-weight:800;transition:transform .18s,filter .18s,box-shadow .18s}.btn:active{transform:scale(.98)}
+.gold{background:linear-gradient(115deg,#fff0a7,#ffda66 45%,#d58d17);color:#201606;box-shadow:0 5px 18px #f5bf3523,inset 0 1px #fff9}.darkbtn{background:linear-gradient(145deg,#20324e,#142137);border:1px solid #3a5276;color:#e5edff}
+.primary{width:100%;padding:17px 10px;margin-top:10px;font-size:16px;letter-spacing:.5px}.primary:disabled{opacity:.45;box-shadow:none;cursor:not-allowed}
+h2{font-size:15px;color:#ffda79;margin:0 0 12px}.info{font-size:12px;color:#bac8df;line-height:1.8}
+.timer{text-align:center;font-size:29px;font-weight:900;color:#ffda79;margin:13px 0 5px;text-shadow:0 0 22px #ffda7922}
+.success{display:none;padding:13px;border-radius:12px;margin-top:12px;background:#103329;border:1px solid #27815e;color:#a8ffdb;font-size:14px;line-height:1.7}
+.adlabel{font-size:10px;letter-spacing:2px;color:#8295b5;text-align:center;margin-bottom:12px}.adslot{width:100%;min-height:70px;overflow:hidden;display:flex;align-items:center;justify-content:center}.adslot iframe{max-width:100%}.banner300{min-height:260px}
+#container-3cd7540a1d76403a9e3e5e3e0e27119c{width:100%;max-width:100%;overflow:hidden}
+.bottom{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#0a1020f5;border-top:1px solid #293956;padding-bottom:env(safe-area-inset-bottom);backdrop-filter:blur(16px)}
+.nav{width:100%;max-width:480px;margin:auto;display:flex;justify-content:space-around;padding:9px 4px}.nav button{background:none;border:0;color:#bdc9df;font-size:11px;line-height:1.7;padding:3px 14px}
+.modal{display:none;position:fixed;inset:0;z-index:50;background:#02050cee;padding:18px;overflow-y:auto;backdrop-filter:blur(8px)}
+.modalbox{max-width:420px;margin:35px auto;background:linear-gradient(145deg,#17243a,#0b1220);border:1px solid #80642e;border-radius:19px;padding:18px;box-shadow:0 24px 70px #0009,inset 0 1px #ffffff10}
+.modalbox h2{font-size:19px}.field{display:block;width:100%;padding:12px;border-radius:10px;border:1px solid #394e70;background:#080e1b;color:#fff;margin:8px 0 13px;outline:none}.field:focus{border-color:#ffda79;box-shadow:0 0 0 3px #ffda7915}
+.result{white-space:pre-wrap;overflow-wrap:anywhere;color:#dce7ff;font-size:13px;line-height:1.8;margin:12px 0}
+.ad-note{font-size:10px;color:#8295b5;text-align:center;line-height:1.6;margin-top:9px}
+@media(min-width:600px){body{background:#03050b}.app{border-left:1px solid #17243b;border-right:1px solid #17243b}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<!-- POPUNDER AD: original provider script retained -->
+<script data-cfasync="false" src="https://afders.org/1/d3a517f63c3356beddd06e770d7f6a67"></script>
+
+<!-- NATIVE AD: original provider script retained -->
+<script async="async" data-cfasync="false" src="https://bicea.org/21/3cd7540a1d76403a9e3e5e3e0e27119c"></script>
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div class="logo" id="gtfLogo" title="Tap four times for admin">GTF</div>
+  <div class="brand"><h1>GTF MINING</h1><p>REWARDS ECOSYSTEM</p></div>
+  <div class="headbal">YOUR BALANCE<strong id="headBalance">0 GTF</strong></div>
+</header>
+
+<section class="card balance">
+  <div class="label">TOTAL GTF BALANCE</div>
+  <div class="amount"><span id="balance">0</span> <span class="coin">GTF</span></div>
+  <div class="userline"><span class="uid">USER ID: <strong id="userID">Loading...</strong></span><button class="btn darkbtn" onclick="copyID()">COPY</button></div>
+</section>
+
+<section class="card">
+  <h2>⚡ GTF Mining Rewards</h2>
+  <p class="info">Wait for the countdown to finish. Press Continue to open the Smart Link. Return to this page to receive your demo reward.</p>
+  <div class="timer" id="timer">01:00</div>
+  <button id="continueBtn" class="btn gold primary" disabled onclick="openSmartLink()">PLEASE WAIT</button>
+  <div id="success" class="success" role="status"></div>
+  <p class="info" id="sessionInfo">Mining session: 60 minutes</p>
+</section>
+
+<!-- NATIVE AD CONTAINER: original container ID retained -->
+<section class="card">
+  <div class="adlabel">ADVERTISEMENT</div>
+  <div class="adslot"><div id="container-3cd7540a1d76403a9e3e5e3e0e27119c"></div></div>
+  <p class="ad-note">Ad availability depends on the provider, region, browser settings and available campaigns.</p>
+</section>
+
+<!-- 300 x 250 BANNER AD: original key and script retained -->
+<section class="card">
+  <div class="adlabel">SPONSORED BANNER</div>
+  <div class="adslot banner300">
+    <script>
+      atOptions = {'key':'d1d6b1b7906c54a48e6359591e413abd','format':'iframe','height':250,'width':300,'params':{}};
+    </script>
+    <script src="https://bicea.org/22/d1d6b1b7906c54a48e6359591e413abd"></script>
+  </div>
+</section>
+
+<section class="card">
+  <h2>📘 GTF Mining Rules</h2>
+  <div class="info">• Each successful demo claim gives 2 GTF.<br>• Wait one minute between claim opportunities.<br>• A mining session lasts up to one hour.<br>• After one hour, mining pauses for two hours.<br>• To request a balance transfer, contact the admin through the Telegram bot where you found this app.</div>
+  <button class="btn darkbtn" style="width:100%;margin-top:13px" onclick="showInfo('Rules',rulesText)">VIEW ALL RULES</button>
+</section>
+
+<section class="card">
+  <h2>🆘 Help Center</h2>
+  <p class="info">For assistance or balance-transfer instructions, return to the Telegram bot and contact the admin.</p>
+  <button class="btn darkbtn" style="width:100%" onclick="showInfo('Help Center',helpText)">HOW TO GET HELP</button>
+</section>
+</div>
+
+<!-- SOCIAL BAR AD: original provider script retained -->
+<script data-cfasync="false" src="https://bicea.org/14/b671c9b3338b4301328eb92f8a1296af"></script>
+
+<div class="bottom"><nav class="nav">
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})">⌂<br>HOME</button>
+  <button onclick="showInfo('Rules',rulesText)">ⓘ<br>RULES</button>
+  <button onclick="showInfo('Help Center',helpText)">♡<br>HELP</button>
+</nav></div>
+
+<div class="modal" id="adminModal"><div class="modalbox">
+  <h2>🔐 GTF Admin Panel</h2>
+  <div id="adminLogin">
+    <p class="info">Enter admin password.</p>
+    <input class="field" id="adminPassword" type="password" placeholder="Admin password" autocomplete="current-password">
+    <button class="btn gold" style="width:100%" onclick="loginAdmin()">LOGIN</button>
+  </div>
+  <div id="adminTools" style="display:none">
+    <label class="info" for="searchID">Search user ID</label>
+    <input class="field" id="searchID" placeholder="GTF-123456">
+    <button class="btn darkbtn" style="width:100%" onclick="searchUser()">SEARCH USER</button>
+    <div id="adminResult" class="result"></div>
+    <label class="info" for="adjustAmount">Amount of GTF to add or subtract</label>
+    <input class="field" id="adjustAmount" type="number" min="0.0001" step="any" inputmode="decimal" placeholder="e.g. 4">
+    <div style="display:flex;gap:8px">
+      <button class="btn gold" style="flex:1" onclick="adjustBalance(1)">ADD GTF</button>
+      <button class="btn darkbtn" style="flex:1" onclick="adjustBalance(-1)">SUBTRACT</button>
+    </div>
+    <button class="btn darkbtn" style="width:100%;margin-top:10px;border-color:#9b4a4a;color:#ffc5c5" onclick="resetBalanceToZero()">RESET BALANCE TO ZERO</button>
+  </div>
+  <button class="btn darkbtn" style="width:100%;margin-top:14px" onclick="closeAdmin()">CLOSE</button>
+  <p class="info" style="margin-top:12px">Browser demo only: changes are stored in this browser and are not shared with other users or devices. Do not use this client-side password for real financial administration.</p>
+</div></div>
+
+<div class="modal" id="infoModal"><div class="modalbox">
+  <h2 id="infoTitle">GTF Information</h2><div class="result" id="infoText"></div>
+  <button class="btn gold" style="width:100%" onclick="closeInfo()">CLOSE</button>
+</div></div>
+
+<script>
+"use strict";
+/* SETTINGS */
+const SMART_LINK = "https://arwf.org/4/b5a838cbf80aadd98ee8b05ae7e91f24";
+const ADMIN_PASSWORD = "ARAFATYT"; // Client-side demo password; not secure for production.
+const CLAIM_SECONDS = 60;
+const SESSION_SECONDS = 3600;
+const COOLDOWN_SECONDS = 7200;
+const REWARD = 2;
+const $ = id => document.getElementById(id);
+
+function readData(key, fallback) {
+  try { const value = localStorage.getItem(key); return value === null ? fallback : JSON.parse(value); }
+  catch (e) { return fallback; }
+}
+function saveData(key, value) {
+  try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+  catch (e) { alert("This browser could not save data. Check browser storage settings."); return false; }
+}
+
+/* Persistent browser-local identity and balance. Existing saved records are reused. */
+let userID = localStorage.getItem("gtf_demo_user_id");
+if (!userID) {
+  userID = "GTF-" + Math.floor(100000 + Math.random() * 900000);
+  try { localStorage.setItem("gtf_demo_user_id", userID); } catch(e) {}
+}
+let users = readData("gtf_demo_users", {});
+if (!users || typeof users !== "object" || Array.isArray(users)) users = {};
+if (!users[userID] || typeof users[userID] !== "object") {
+  users[userID] = {balance:0};
+  saveData("gtf_demo_users", users);
+} else {
+  users[userID].balance = Math.max(0, Number(users[userID].balance) || 0);
+  saveData("gtf_demo_users", users);
+}
+
+let state = readData("gtf_demo_state", null);
+if (!state || typeof state !== "object") {
+  state = {sessionStart:Date.now(),cooldownUntil:0,nextClaim:Date.now()+CLAIM_SECONDS*1000,pending:false,pendingAt:0};
+  saveData("gtf_demo_state", state);
+}
+let adminTarget = null, logoClicks = 0, lastLogoClick = 0;
+
+const rulesText =
+"• Wait one minute for a claim opportunity.\n" +
+"• Press Continue to open the Smart Link.\n" +
+"• Return to this page to receive the demo reward.\n" +
+"• Each demo reward is 2 GTF.\n" +
+"• Mining runs for up to one hour.\n" +
+"• After the session, wait two hours before restarting.\n" +
+"• Contact the Telegram bot admin for transfer instructions.\n\n" +
+"Important: this HTML demo cannot verify that an ad was completed.";
+const helpText = "For help or balance-transfer instructions, return to the Telegram bot where you found this app and contact the admin.";
+
+function saveState(){ saveData("gtf_demo_state",state); }
+function getUsers(){ const all=readData("gtf_demo_users",{}); return all&&typeof all==="object"&&!Array.isArray(all)?all:{}; }
+function saveUsers(value){ users=value; return saveData("gtf_demo_users",value); }
+function getBalance(id){ const all=getUsers(); return all[id]?Math.max(0,Number(all[id].balance)||0):0; }
+function updateBalanceUI(){
+  $("userID").textContent=userID;
+  const bal=getBalance(userID);
+  $("balance").textContent=Number(bal.toFixed(4)).toString();
+  $("headBalance").textContent=Number(bal.toFixed(4)).toString()+" GTF";
+}
+function formatTime(seconds){
+  seconds=Math.max(0,Math.floor(seconds));
+  const h=Math.floor(seconds/3600),m=Math.floor((seconds%3600)/60),s=seconds%60;
+  if(h>0)return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+/* Session timer */
+function tick(){
+  const now=Date.now();
+  if(state.cooldownUntil&&now<state.cooldownUntil){
+    $("timer").textContent=formatTime((state.cooldownUntil-now)/1000);
+    $("continueBtn").disabled=true;$("continueBtn").textContent="MINING PAUSED";
+    $("sessionInfo").textContent="Your 2-hour cooldown is active.";
+    updateBalanceUI();return;
+  }
+  if(state.cooldownUntil&&now>=state.cooldownUntil){
+    state.cooldownUntil=0;state.sessionStart=now;state.nextClaim=now+CLAIM_SECONDS*1000;
+    state.pending=false;state.pendingAt=0;saveState();
+  }
+  if(now-state.sessionStart>=SESSION_SECONDS*1000){
+    state.pending=false;state.pendingAt=0;state.cooldownUntil=now+COOLDOWN_SECONDS*1000;saveState();
+    $("success").style.display="none";tick();return;
+  }
+  const remaining=(state.nextClaim-now)/1000;
+  $("timer").textContent=formatTime(remaining);
+  if(state.pending){$("continueBtn").disabled=true;$("continueBtn").textContent="WAITING FOR RETURN";}
+  else{$("continueBtn").disabled=remaining>0;$("continueBtn").textContent=remaining>0?"PLEASE WAIT":"CONTINUE 🚀";}
+  $("sessionInfo").textContent="Session time left: "+formatTime((SESSION_SECONDS*1000-(now-state.sessionStart))/1000);
+  updateBalanceUI();
+}
+function openSmartLink(){
+  const now=Date.now();
+  if(state.pending||now<state.nextClaim||(state.cooldownUntil&&now<state.cooldownUntil)||now-state.sessionStart>=SESSION_SECONDS*1000)return;
+  state.pending=true;state.pendingAt=now;saveState();
+  $("continueBtn").disabled=true;$("continueBtn").textContent="OPENING SMART LINK...";
+  $("success").style.display="block";$("success").textContent="Smart Link is opening. Return to this page to collect your demo reward.";
+  window.location.href=SMART_LINK;
+}
+
+/* This awards a demo reward on return; it cannot confirm ad completion. */
+function claimOnReturn(){
+  if(!state.pending){tick();return;}
+  const now=Date.now();
+  if(state.cooldownUntil&&now<state.cooldownUntil){
+    state.pending=false;state.pendingAt=0;saveState();tick();return;
+  }
+  if(now-state.sessionStart>=SESSION_SECONDS*1000){
+    state.pending=false;state.pendingAt=0;state.cooldownUntil=now+COOLDOWN_SECONDS*1000;saveState();tick();return;
+  }
+  state.pending=false;state.pendingAt=0;state.nextClaim=now+CLAIM_SECONDS*1000;saveState();
+  const all=getUsers();if(!all[userID])all[userID]={balance:0};
+  all[userID].balance=(Number(all[userID].balance)||0)+REWARD;saveUsers(all);
+  $("success").style.display="block";$("success").textContent="🎉 Congratulations! You earned "+REWARD+" GTF!";
+  updateBalanceUI();tick();
+}
+window.addEventListener("pageshow",()=>setTimeout(claimOnReturn,500));
+window.addEventListener("focus",()=>{if(state.pending)setTimeout(claimOnReturn,300);});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&state.pending)setTimeout(claimOnReturn,300);});
+
+function copyID(){
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(userID).then(()=>alert("User ID copied!")).catch(()=>prompt("Copy your ID:",userID));
+  else prompt("Copy your ID:",userID);
+}
+
+/* Admin panel: four quick logo taps */
+$("gtfLogo").addEventListener("click",function(){
+  const now=Date.now();if(now-lastLogoClick>1800)logoClicks=0;lastLogoClick=now;logoClicks++;
+  if(logoClicks>=4){logoClicks=0;$("adminModal").style.display="block";$("adminPassword").value="";$("adminLogin").style.display="block";$("adminTools").style.display="none";$("adminResult").textContent="";adminTarget=null;}
+});
+function loginAdmin(){
+  if($("adminPassword").value!==ADMIN_PASSWORD){alert("Incorrect password.");return;}
+  $("adminLogin").style.display="none";$("adminTools").style.display="block";
+}
+function searchUser(){
+  const id=$("searchID").value.trim().toUpperCase(),all=getUsers();
+  if(!all[id]){adminTarget=null;$("adminResult").textContent="User not found in this browser's demo records. Records from other devices cannot be searched here.";return;}
+  adminTarget=id;
+  $("adminResult").textContent="User ID: "+id+"\nBalance: "+Number(all[id].balance||0)+" GTF";
+}
+function adjustBalance(direction){
+  if(!adminTarget){alert("Search a user first.");return;}
+  if(direction!==1&&direction!==-1){alert("Invalid adjustment.");return;}
+  const amount=Number($("adjustAmount").value);
+  if(!Number.isFinite(amount)||amount<=0){alert("Enter an amount greater than zero.");return;}
+  const all=getUsers();if(!all[adminTarget]){alert("User record not found.");adminTarget=null;return;}
+  const oldBalance=Math.max(0,Number(all[adminTarget].balance)||0);
+  /* Subtraction clamps at zero: e.g. 1 - 5 becomes 0, never negative. */
+  all[adminTarget].balance=direction===-1?Math.max(0,oldBalance-amount):oldBalance+amount;
+  if(!saveUsers(all)){alert("Could not save the balance change.");return;}
+  $("adminResult").textContent="User ID: "+adminTarget+"\nPrevious balance: "+oldBalance+" GTF\nUpdated balance: "+all[adminTarget].balance+" GTF";
+  if(adminTarget===userID)updateBalanceUI();
+}
+function resetBalanceToZero(){
+  if(!adminTarget){alert("Search a user first.");return;}
+  const all=getUsers();if(!all[adminTarget]){alert("User record not found.");return;}
+  const previous=Math.max(0,Number(all[adminTarget].balance)||0);
+  if(!confirm("Set "+adminTarget+"'s balance to zero? This cannot be undone from this panel."))return;
+  all[adminTarget].balance=0;
+  if(!saveUsers(all)){alert("Could not save the balance change.");return;}
+  $("adminResult").textContent="User ID: "+adminTarget+"\nPrevious balance: "+previous+" GTF\nCurrent balance: 0 GTF";
+  if(adminTarget===userID)updateBalanceUI();
+}
+function closeAdmin(){$("adminModal").style.display="none";adminTarget=null;}
+function showInfo(title,text){$("infoTitle").textContent=title;$("infoText").textContent=text;$("infoModal").style.display="block";}
+function closeInfo(){$("infoModal").style.display="none";}
+
+/* Initial render and clock */
+updateBalanceUI();tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
